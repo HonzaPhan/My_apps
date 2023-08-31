@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&family=Roboto:wght@100&display=swap');
+
+* {
+  font-family: 'PT Sans', sans-serif;
+}
+
+#root {
+  background-color: #4158D0;
+  background-image: linear-gradient(315deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+
+.fizz-buzz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  height: 100vh;
+}
+
+.btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.increase-btn,
+.decrease-btn {
+  font-size: 20px;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 50px;
+  transition : 500ms;
+  transform: translateY(0);
+  cursor: pointer;
+}
+
+.increase-btn {
+  background-color: #28a745;
+  border: 2px solid #28a745;
+}
+
+.decrease-btn {
+  background-color: #dc3545;
+  border: 2px solid #dc3545;
+}
+
+:is(.increase-btn, .decrease-btn):hover {
+  padding: 10px 50px;
+  transform : translateY(-0px);
+  background-color: #fff;
+}
+
+.increase-btn:hover {
+  color: #28a745;
+  border: solid 2px #28a745;
+}
+
+.decrease-btn:hover {
+  color: #dc3545;
+  border: solid 2px #dc3545;
+}
+
+.fizz-buzz-number {
+  font-size: 5rem;
+}
