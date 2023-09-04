@@ -1,0 +1,9 @@
+import { createTheme } from "@mui/material";
+createTheme -> vytvoří paletu, změna primary color, secondary, atd.
+https://mui.com/material-ui/customization/theming/#createtheme-options-args-theme
+
+import styled from "@emotion/styled";
+import { Button } from "@mui/material";
+styled(Button) -> umožní stylovat cokoliv v tomto případě Button
+https://mui.com/material-ui/experimental-api/css-theme-variables/usage/#using-theme-variables
+
