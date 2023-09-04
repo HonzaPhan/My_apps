@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project is just for learning `MUI`. This project is solely for learning MUI; it might `not include` all the necessary functionalities.
+This project is just for learning `MUI`. This project is solely for learning MUI, it might `not include` all the necessary functionalities.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
