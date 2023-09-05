@@ -13,7 +13,7 @@ const WeatherBox = ({ weather }: IWeatherBoxIProps): JSX.Element => {
       </div>
       <div className="weather-box">
         <div className="temp">{weather?.main?.temp}°C</div>
-        <div className="weather">
+        <div className="weather-type">
           {weather?.weather?.length > 0 && weather?.weather[0].main}
         </div>
       </div>

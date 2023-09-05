@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import SearchInput from "./components/search-input";
 import WeatherBox from "./components/weather-box";
 import { IWeatherBox } from "./helpers/Types";
-
+import WeatherConditions from "./components/weather-conditions";
 
 function App() {
   const API = {
@@ -14,22 +14,27 @@ function App() {
   const [weather, setWeather] = useState<IWeatherBox>({
     name: "",
     sys: {
-        country: ""
+      country: "",
     },
     main: {
-        temp: 0
+      temp: 0,
+      humidity: 0,
+      temp_max: 0,
+      temp_min: 0,
+      pressure: 0,
     },
     weather: [
       {
-        main: ""
-      }
-    ]
+        main: "",
+      },
+    ],
+    wind: {
+      deg: 0,
+      speed: 0,
+    },
   });
 
-  /* const [isLoading, setIsLoading] = useState(true) */
-
   useEffect(() => {
-    /* setIsLoading() */
     getWeatherValue("Prague");
   }, []);
 
@@ -39,15 +44,18 @@ function App() {
       .then((data) => {
         setWeather(data);
       })
-      .catch((err) => console.log(err) /* setIsLoading(false) */);
+      .catch((err) => console.log(err));
   };
 
-  console.log(weather);
-  
   return (
-    <div className={`app ${weather?.main?.temp && weather?.main?.temp > 20 && "warm"}`}>
+    <div
+      className={`app ${
+        weather?.main?.temp && weather?.main?.temp > 20 && "warm"
+      }`}
+    >
       <main>
         <WeatherBox weather={weather} />
+        <WeatherConditions weather={weather} />
         <SearchInput getWeatherValue={getWeatherValue} />
       </main>
     </div>

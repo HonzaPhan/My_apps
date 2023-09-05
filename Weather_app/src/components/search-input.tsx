@@ -12,7 +12,7 @@ const SearchInput = ({ getWeatherValue }: SearchInputIProps): JSX.Element => {
       <input
         type="text"
         className="search-bar"
-        placeholder="search..."
+        placeholder="Search..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
