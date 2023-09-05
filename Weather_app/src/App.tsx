@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import SearchInput from "./components/search-input";
 import WeatherBox from "./components/weather-box";
 import { IWeatherBox } from "./helpers/Types";
