@@ -1,22 +1,20 @@
+import { Box, Typography } from "@mui/material";
 import IWeatherBoxIProps from "../helpers/Types";
 
 const WeatherBox = ({ weather }: IWeatherBoxIProps): JSX.Element => {
   return (
     <>
-      {" "}
-      {/* React fragment */}
-      <div className="location-box">
-        <div className="location">
+      <Box className="location-box">
+        <Typography className="location">
           {weather?.name}, {weather?.sys?.country}
-        </div>
-        <div className="date"></div>
-      </div>
-      <div className="weather-box">
-        <div className="temp">{weather?.main?.temp}°C</div>
-        <div className="weather-type">
+        </Typography>
+      </Box>
+      <Box className="weather-box">
+        <Typography className="temp">{weather?.main?.temp}°C</Typography>
+        <Typography className="weather-type">
           {weather?.weather?.length > 0 && weather?.weather[0].main}
-        </div>
-      </div>
+        </Typography>
+      </Box>
     </>
   );
 };

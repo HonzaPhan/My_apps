@@ -3,6 +3,7 @@ import SearchInput from "./components/search-input";
 import WeatherBox from "./components/weather-box";
 import { IWeatherBox } from "./helpers/Types";
 import WeatherConditions from "./components/weather-conditions";
+import CurrentTime from "./components/current-time";
 
 function App() {
   const API = {
@@ -49,10 +50,11 @@ function App() {
   return (
     <div
       className={`app ${
-        weather?.main?.temp && weather?.main?.temp > 20 && "warm"
+        weather?.main?.temp && weather?.main?.temp > 18 && "warm"
       }`}
     >
       <main>
+        <CurrentTime />
         <WeatherBox weather={weather} />
         <WeatherConditions weather={weather} />
         <SearchInput getWeatherValue={getWeatherValue} />
