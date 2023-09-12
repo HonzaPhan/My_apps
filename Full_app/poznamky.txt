@@ -1,0 +1,4 @@
+úkol:
+- zobrazit rozumně a graficky data (height, weight, hp, speed, frontdefault)
+- vytvořit komponentu
+- udělat úvodní stránku pro routování podle dokumentace, udělat linky
