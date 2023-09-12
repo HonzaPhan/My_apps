@@ -1,5 +1,7 @@
-# Weather app
- This project was created with [Create React App](https://github.com/facebookincubator/create-react-app).
+# App with routing
+This project centers around implementing routing and gaining experience with React, TypeScript, and APIs.
+
+This project was created with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 How to run the app locally:
 
