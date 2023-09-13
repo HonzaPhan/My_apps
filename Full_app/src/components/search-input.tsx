@@ -1,3 +1,4 @@
+import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 
 interface SearchInputIProps {
@@ -8,18 +9,19 @@ const SearchInput = ({ getWeatherValue }: SearchInputIProps): JSX.Element => {
   const [query, setQuery] = useState<string>("Prague");
 
   return (
-    <div className="search-box">
-      <input
-        type="text"
-        className="search-bar"
+    <Box className="search-box">
+      <TextField
         placeholder="Search..."
         value={query}
+        focused
         onChange={(e) => setQuery(e.target.value)}
+        fullWidth
+        inputProps={{ style: { color: "white" } }}
       />
-      <button className="search-button" onClick={() => getWeatherValue(query)}>
+      <Button variant="contained" onClick={() => getWeatherValue(query)}>
         Search
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 };
 

@@ -1,16 +1,17 @@
 import {
+  Box,
   Button,
   Card,
   CardContent,
   CircularProgress,
-  ImageListItem,
   Stack,
-  Typography,
-  capitalize,
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Pokemon, PokemonBaseStat } from "../helpers/Types";
+import PokemonCard from "../components/pokemon-card";
+import { Link } from "react-router-dom";
+import { Home } from "@mui/icons-material";
 
 const PokemonsPage = () => {
   const [counter, setCounter] = useState(0);
@@ -80,72 +81,62 @@ const PokemonsPage = () => {
   console.log(pokemons);
 
   return (
-    <Stack>
-      <Button onClick={nextPage}>Next page</Button>
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <Stack
-          spacing={{ xs: 1, sm: 2 }}
-          direction="row"
-          useFlexGap
-          flexWrap="wrap"
-          justifyContent="center"
+    <>
+      <Link to="/">
+        <Button
+          variant="contained"
+          sx={{ position: "sticky", top: 5, left: 5 }}
         >
-          {pokemons.map((pokemon: Pokemon, index: number) => {
-            return (
-              <Card sx={{ width: 290 }} key={index}>
-                <CardContent sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                  <Typography
-                    sx={{ fontSize: 14, fontWeight: "bold" }}
-                    color="text.secondary"
-                    gutterBottom
+          <Home />
+        </Button>
+      </Link>
+      <Stack>
+        <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <Button
+            onClick={nextPage}
+            variant="contained"
+            sx={{ width: "120px" }}
+          >
+            Next page
+          </Button>
+        </Box>
+        {isLoading ? (
+          <CircularProgress sx={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}/>
+        ) : (
+          <Stack
+            spacing={{ xs: 1, sm: 2 }}
+            direction="row"
+            useFlexGap
+            flexWrap="wrap"
+            justifyContent="center"
+          >
+            {pokemons.map((pokemon: Pokemon, index: number) => {
+              return (
+                <Card sx={{ width: 290 }} key={index}>
+                  <CardContent
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
                   >
-                    {capitalize(pokemon.name)}
-                  </Typography>
-                  <ImageListItem sx={{ width: "100px", height: "100px" }}>
-                    <img src={pokemon.front_default} />
-                  </ImageListItem>
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    HP: {pokemon.hp.base_stat}
-                  </Typography>
-
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Speed: {pokemon.speed.base_stat}
-                  </Typography>
-
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Height: {pokemon.height}
-                  </Typography>
-
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Weight: {pokemon.weight}
-                  </Typography>
-
-                  <Typography variant="body2">{pokemon.url}</Typography>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </Stack>
-      )}
-    </Stack>
+                    <PokemonCard
+                      name={pokemon.name}
+                      hp={pokemon.hp.base_stat}
+                      speed={pokemon.speed.base_stat}
+                      height={pokemon.height}
+                      weight={pokemon.weight}
+                      image={pokemon.front_default}
+                    />
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </Stack>
+        )}
+      </Stack>
+    </>
   );
 };
 
