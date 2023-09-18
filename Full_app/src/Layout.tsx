@@ -4,6 +4,7 @@ import WeatherPage from "./pages/weather-page";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/home-page";
 import ErrorPage from "./pages/error-page";
+import PokemonPage from "./pages/pokemon-page";
 
 const router = createBrowserRouter([
   {
@@ -14,13 +15,16 @@ const router = createBrowserRouter([
   {
     path: "/weather",
     element: <WeatherPage/>,
-    errorElement: <ErrorPage />
   },
   {
     path: "/pokemons",
     element: <PokemonsPage/>,
-    errorElement: <ErrorPage />
   },
+  {
+    path: "/pokemons/:id",
+    element: <PokemonPage />,
+  },
+
 ]);
 
 const Layout = () => {

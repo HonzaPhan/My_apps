@@ -1,11 +1,6 @@
 import { Box, Typography } from "@mui/material"
 import { useRouteError } from "react-router-dom"
-
-interface EP {
-    error: ErrorPage
-}
-
-interface ErrorPage {
+interface Error{
     error: {
         message: string,
         stack: string
@@ -14,11 +9,12 @@ interface ErrorPage {
     status: number
 }
 
-
 const ErrorPage = (): JSX.Element => {
     const error = useRouteError() as Error
     console.log(error);
-    const errorMessage = error?.message || error?.name 
+    const errorMessage = error?.error.message
+    console.log(errorMessage);
+    
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100vw", height: "100vh", gap: 5 }}>

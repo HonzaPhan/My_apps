@@ -7,17 +7,23 @@ import {
   Stack,
 } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Pokemon, PokemonBaseStat } from "../helpers/Types";
+import { useContext, useEffect, useState } from "react";
+import { PokemonBaseStat, PokemonsStats } from "../helpers/Types";
 import PokemonCard from "../components/pokemon-card";
 import { Link } from "react-router-dom";
 import { Home } from "@mui/icons-material";
+import { WeatherDataContext } from "../state/context/weatherDataContext";
 
 const PokemonsPage = () => {
   const [counter, setCounter] = useState(0);
-  const [pokemons, setPokemons] = useState<Pokemon[] | []>([]);
+  const [pokemons, setPokemons] = useState<PokemonsStats[] | []>([]);
   const [isLoading, setIsLoading] = useState(false);
+
   const POKE_LIMIT = 30;
+
+  const { value } = useContext(WeatherDataContext);
+
+  console.log(value);
 
   const nextPage = () => {
     setPokemons([]);
@@ -35,7 +41,7 @@ const PokemonsPage = () => {
       })
       .then((result) => {
         const formattedPokemons = result.data.results;
-        formattedPokemons.forEach((pokemon: Pokemon) => {
+        formattedPokemons.forEach((pokemon: PokemonsStats) => {
           axios
             .get(pokemon.url)
             .then((res) => {
@@ -48,6 +54,7 @@ const PokemonsPage = () => {
               );
 
               return {
+                url: pokemon.url,
                 name: res.data.name,
                 abilities: res.data.abilities,
                 forms: res.data.forms,
@@ -60,13 +67,13 @@ const PokemonsPage = () => {
               };
             })
             .then((result) => {
-              const pokemon = result as Pokemon;
+              const pokemon = result as PokemonsStats;
               const existingPokemon = pokemons.find(
-                (x: Pokemon) => x.name === pokemon.name
+                (x: PokemonsStats) => x.name === pokemon.name
               );
 
               if (!existingPokemon) {
-                setPokemons((prevPokemons: Pokemon[]) => {
+                setPokemons((prevPokemons: PokemonsStats[]) => {
                   return [...prevPokemons, pokemon];
                 });
               }
@@ -77,8 +84,6 @@ const PokemonsPage = () => {
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
   }, [counter]);
-
-  console.log(pokemons);
 
   return (
     <>
@@ -101,7 +106,15 @@ const PokemonsPage = () => {
           </Button>
         </Box>
         {isLoading ? (
-          <CircularProgress sx={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}/>
+          <CircularProgress
+            sx={{
+              width: "100vw",
+              height: "100vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          />
         ) : (
           <Stack
             spacing={{ xs: 1, sm: 2 }}
@@ -110,7 +123,7 @@ const PokemonsPage = () => {
             flexWrap="wrap"
             justifyContent="center"
           >
-            {pokemons.map((pokemon: Pokemon, index: number) => {
+            {pokemons.map((pokemon: PokemonsStats, index: number) => {
               return (
                 <Card sx={{ width: 290 }} key={index}>
                   <CardContent
@@ -121,14 +134,7 @@ const PokemonsPage = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <PokemonCard
-                      name={pokemon.name}
-                      hp={pokemon.hp.base_stat}
-                      speed={pokemon.speed.base_stat}
-                      height={pokemon.height}
-                      weight={pokemon.weight}
-                      image={pokemon.front_default}
-                    />
+                    <PokemonCard pokemon={pokemon} />
                   </CardContent>
                 </Card>
               );

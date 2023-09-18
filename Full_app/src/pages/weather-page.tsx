@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IWeatherBox } from "../helpers/Types";
 import CurrentTime from "../components/current-time";
 import WeatherBox from "../components/weather-box";
@@ -7,6 +7,7 @@ import SearchInput from "../components/search-input";
 import { Box, Button, Container, useMediaQuery, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Home } from "@mui/icons-material";
+import { WeatherDataContext } from "../state/context/weatherDataContext";
 
 const WeatherPage = () => {
   const theme = useTheme();
@@ -44,10 +45,13 @@ const WeatherPage = () => {
     getWeatherValue("Prague");
   }, []);
 
+  const {setValue} = useContext(WeatherDataContext)
+
   const getWeatherValue = (query: string): void => {
     fetch(`${API.base}weather?q=${query}&units=metric&APPID=${API.key}`)
       .then((res) => res.json())
       .then((data) => {
+        setValue(data.name);
         setWeather(data);
       })
       .catch((err) => console.log(err));

@@ -1,23 +1,35 @@
-import { Box, ImageListItem, Typography, capitalize } from "@mui/material";
-interface PokemonCardIProps {
-  name: string;
-  hp: number;
-  speed: number;
-  height: number;
-  weight: number;
-  image: string;
-}
+import {
+  Box,
+  Button,
+  ImageListItem,
+  Typography,
+  capitalize,
+} from "@mui/material";
+import { CustomTypography, CustomTypographyLabel } from "../styles/pokomens-page";
+import { Link } from "react-router-dom";
+import { Pokemon, PokemonsStats } from "../helpers/Types";
+import { useDispatch } from "react-redux";
+import { setCurrentPokemon } from "../state/reducers/currentPokemonReducer";
 
-const PokemonCard = ({
-  name,
-  image,
-  hp,
-  speed,
-  height,
-  weight,
-}: PokemonCardIProps): JSX.Element => {
+const PokemonCard = ({pokemon}: Pokemon): JSX.Element => {
+  const {
+    id,
+    name,
+    front_default,
+    hp: { base_stat: hp_stat },
+    speed: { base_stat: speed_stat },
+    weight,
+    height,
+  } = pokemon;
+
+  const dispatch = useDispatch()
+
   const FONT_SIZE: number = 14;
   const COLOR: string = "text.secondary";
+
+  const saveCurrentPokemon = (pokemon: PokemonsStats) => {
+    dispatch(setCurrentPokemon(pokemon))
+  };
 
   return (
     <Box
@@ -35,65 +47,29 @@ const PokemonCard = ({
       >
         {capitalize(name)}
       </Typography>
-
       <ImageListItem sx={{ width: "100px", height: "100px" }}>
-        <img src={image} />
+        <img src={front_default} alt={name}/>
       </ImageListItem>
 
-      <Typography
-        sx={{
-          fontSize: FONT_SIZE,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "100%",
-        }}
-        color={COLOR}
-        gutterBottom
-      >
-        <Typography sx={{ fontWeight: "bold" }}>HP:</Typography>
-        {hp}
-      </Typography>
+      <CustomTypography color={COLOR} gutterBottom>
+        <CustomTypographyLabel>HP:</CustomTypographyLabel>
+        {hp_stat}
+      </CustomTypography>
 
-      <Typography
-        sx={{
-          fontSize: FONT_SIZE,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "100%",
-        }}
-        color={COLOR}
-        gutterBottom
-      >
-        <Typography sx={{ fontWeight: "bold" }}>SPEED:</Typography> {speed}
-      </Typography>
-      <Typography
-        sx={{
-          fontSize: FONT_SIZE,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "100%",
-        }}
-        color={COLOR}
-        gutterBottom
-      >
-        <Typography sx={{ fontWeight: "bold" }}>HEIGHT:</Typography> {height}
-      </Typography>
-      <Typography
-        sx={{
-          fontSize: FONT_SIZE,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "100%",
-        }}
-        color={COLOR}
-        gutterBottom
-      >
-        <Typography sx={{ fontWeight: "bold" }}>WEIGHT:</Typography> {weight}
-      </Typography>
+      <CustomTypography color={COLOR} gutterBottom>
+        <CustomTypographyLabel>SPEED:</CustomTypographyLabel> {speed_stat}
+      </CustomTypography>
+
+      <CustomTypography color={COLOR} gutterBottom>
+        <CustomTypographyLabel>HEIGHT:</CustomTypographyLabel> {height}
+      </CustomTypography>
+
+      <CustomTypography color={COLOR} gutterBottom>
+        <CustomTypographyLabel>WEIGHT:</CustomTypographyLabel> {weight}
+      </CustomTypography>
+      <Link to={name}>
+        <Button onClick={() => saveCurrentPokemon(pokemon)}>DETAIL</Button>
+      </Link>
     </Box>
   );
 };

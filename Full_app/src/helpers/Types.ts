@@ -28,6 +28,9 @@ export interface IWeatherBox {
 
 // Pokemon interfaces
 export interface Pokemon {
+  pokemon: PokemonsStats;
+}
+export interface PokemonsStats {
   name: string;
   url: string;
   height: number;

@@ -1,4 +1,10 @@
+useState - lokální state
+Redux - globální state
+
 úkol:
-- zobrazit rozumně a graficky data (height, weight, hp, speed, frontdefault)
-- vytvořit komponentu
-- udělat úvodní stránku pro routování podle dokumentace, udělat linky
+- detail pokemona nastylovat
+    - tlačítko zpět
+- počasí - vytáhnout malou verzi (malou kartu) a zobrazit všude kromě weather page a nepřepoužívat komponentu!!!
+    - musím použít redux
+- vyřešit theme (v App.tsx)
+    - useContext
