@@ -8,9 +8,12 @@ import { Box, Button, Container, useMediaQuery, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Home } from "@mui/icons-material";
 import { WeatherDataContext } from "../state/context/weatherDataContext";
+import { RootState } from "../state/store";
+import { useSelector } from "react-redux";
 
 const WeatherPage = () => {
   const theme = useTheme();
+  const data = useSelector((state: RootState) => state.currentWeatherReducer);
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const API = {

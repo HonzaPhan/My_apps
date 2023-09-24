@@ -13,6 +13,7 @@ import PokemonCard from "../components/pokemon-card";
 import { Link } from "react-router-dom";
 import { Home } from "@mui/icons-material";
 import { WeatherDataContext } from "../state/context/weatherDataContext";
+import { ThemeContext } from "../state/context/themeContext";
 
 const PokemonsPage = () => {
   const [counter, setCounter] = useState(0);
@@ -22,9 +23,10 @@ const PokemonsPage = () => {
   const POKE_LIMIT = 30;
 
   const { value } = useContext(WeatherDataContext);
+  const { theme } = useContext(ThemeContext);
 
-  console.log(value);
-
+  console.log(value)
+  
   const nextPage = () => {
     setPokemons([]);
     setCounter(counter + POKE_LIMIT);
