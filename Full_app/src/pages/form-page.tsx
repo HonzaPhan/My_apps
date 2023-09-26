@@ -16,8 +16,6 @@ const FormPage = () => {
     setFormStep(formStep + 1);
   };
 
-  console.log(formStep);
-
   return (
     <Box>
       {formStep === 1 && <UserPersonalDetails />}
