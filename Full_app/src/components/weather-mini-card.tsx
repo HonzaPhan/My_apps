@@ -1,21 +1,10 @@
-import { IWeatherBox, IWeatherBoxIProps } from "../helpers/Types";
-import { useDispatch } from "react-redux";
+import { IWeatherBoxIProps } from "../helpers/Types";
+import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
+import { RootState } from "../state/store";
 
 const WeatherMiniCard = ({ weather }: IWeatherBoxIProps): JSX.Element => {
-  const {
-    name,
-    sys: { country },
-    main: { temp, humidity, temp_max, temp_min, pressure },
-    weather: [{ main }],
-    wind: { deg, speed },
-  } = weather;
-
-  const dispatch = useDispatch();
-
-  const saveCurrentWeather = (weather: IWeatherBox) => {
-    // dispatch(saveCurrentWeather(weather));
-  };
+  const data = useSelector((state: RootState) => state.currentWeatherReducer);
 
   return (
     <>
@@ -27,10 +16,10 @@ const WeatherMiniCard = ({ weather }: IWeatherBoxIProps): JSX.Element => {
           backgroundColor: "yellow",
         }}
       >
-        <Typography color="initial">Country: {country}</Typography>
-        <Typography color="initial">City: {name}</Typography>
-        <Typography color="initial">Temp: {temp}°</Typography>
-        <Typography color="initial">It is: {main}</Typography>
+        <Typography color="initial">Country: {data.sys.country}</Typography>
+        <Typography color="initial">City: {data.name}</Typography>
+        <Typography color="initial">Temp: {data.main.temp}°</Typography>
+        <Typography color="initial">It is: {data.weather[0].main}</Typography>
       </Box>
     </>
   );

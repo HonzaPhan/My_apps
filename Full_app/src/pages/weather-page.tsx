@@ -8,13 +8,11 @@ import { Box, Button, Container, useMediaQuery, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Home } from "@mui/icons-material";
 import { WeatherDataContext } from "../state/context/weatherDataContext";
-import { RootState } from "../state/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCurrentWeather } from "../state/reducers/currentWeatherReducer";
 
 const WeatherPage = () => {
   const theme = useTheme();
-  const data = useSelector((state: RootState) => state.currentWeatherReducer);
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useDispatch();
 
@@ -50,15 +48,19 @@ const WeatherPage = () => {
     getWeatherValue("Prague");
   }, []);
 
-  const { setValue } = useContext(WeatherDataContext);
+  useEffect(() => {
+    setCurrentWeather(weather)
+  }, [weather]);
+
+  const {setValue} = useContext(WeatherDataContext)
 
   const getWeatherValue = (query: string): void => {
     fetch(`${API.base}weather?q=${query}&units=metric&APPID=${API.key}`)
       .then((res) => res.json())
       .then((data) => {
+        dispatch(setCurrentWeather(data))
         setValue(data.name);
         setWeather(data);
-        dispatch(setCurrentWeather(weather));
       })
       .catch((err) => console.log(err));
   };
