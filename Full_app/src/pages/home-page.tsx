@@ -47,6 +47,14 @@ const HomePage = () => {
             </Button>
           </Link>
         </ListItem>
+
+        <ListItem style={listItemStyle}>
+          <Link to="/registration">
+            <Button variant="contained" style={buttonStyle}>
+              Form Register
+            </Button>
+          </Link>
+        </ListItem>
       </List>
     </Box>
   );

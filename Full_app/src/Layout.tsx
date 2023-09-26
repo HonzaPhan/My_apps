@@ -7,6 +7,7 @@ import ErrorPage from "./pages/error-page";
 import PokemonPage from "./pages/pokemon-page";
 import WeatherMiniCard from "./components/weather-mini-card";
 import { IWeatherBox } from "./helpers/Types";
+import FormPage from "./pages/form-page";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,10 @@ const router = createBrowserRouter([
     path: "/pokemons/:id",
     element: <PokemonPage />,
   },
-
+  {
+    path: "/registration",
+    element: <FormPage />
+  },
 ]);
 
 const Layout = () => {
