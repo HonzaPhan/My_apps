@@ -16,8 +16,8 @@ const initialState: IWeatherBox = {
   },
   weather: [
     {
-      main: ""
-    }
+      main: "",
+    },
   ],
   wind: {
     deg: 0,
