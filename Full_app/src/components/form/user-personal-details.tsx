@@ -4,6 +4,7 @@ import Validation from "../../helpers/Validation";
 import { formClassNames } from "./formClassNames";
 import "./formStyle.css";
 import { FormErrorMessages } from "../../helpers/Types";
+import { useDispatch } from "react-redux";
 
 const validate = new Validation();
 
@@ -13,6 +14,8 @@ const UserPersonalDetails = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+
+  const dispatch = useDispatch();
 
   const [messages, setMessages] = useState<FormErrorMessages>({
     username: "",
@@ -63,6 +66,15 @@ const UserPersonalDetails = () => {
     }
 
     setMessages(updatedMessages);
+
+    dispatch({
+      username: userNameRef.current?.value,
+      name: nameRef.current?.value,
+      surname: surnameRef.current?.value,
+      phone: phoneRef.current?.value,
+      email: emailRef.current?.value,
+      type: undefined
+    })
   };
 
   console.log(userNameRef.current?.value);
@@ -70,6 +82,7 @@ const UserPersonalDetails = () => {
 
   return (
     <form className={formClassNames.form}>
+      <h2>Personal Details</h2>
       <input
         type="text"
         name="username"

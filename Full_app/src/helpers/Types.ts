@@ -65,6 +65,22 @@ export interface PokemonBaseStat {
 }
 
 // Form interfaces
+export default interface Form {
+  username: string;
+  name: string;
+  surname: string;
+  phone: number;
+  email: string;
+  companyName: string;
+  typeOfCompany: string;
+  companyAddress: string;
+  companyCity: string;
+  companyZipCode: number;
+  bankAccountNumber: number;
+  bankName: string;
+  bankCode: number;
+}
+
 export interface FormErrorMessages {
   username?: string;
   name?: string;

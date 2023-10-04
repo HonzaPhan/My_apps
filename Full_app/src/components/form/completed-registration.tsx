@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import { formClassNames } from "./formClassNames";
 
 const CompletedRegistration = () => {
   return (
-    <div>CompletedRegistration</div>
-  )
-}
+    <div className={formClassNames.completedMessage}>
+      You have completed your registration!
+    </div>
+  );
+};
 
-export default CompletedRegistration
+export default CompletedRegistration;

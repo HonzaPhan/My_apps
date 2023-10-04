@@ -27,6 +27,7 @@ const UserBankDetails = () => {
 
   return (
     <form className={formClassNames.form}>
+      <h2>Bank Details</h2>
       <input
         type="text"
         name="bankaccountnumber"

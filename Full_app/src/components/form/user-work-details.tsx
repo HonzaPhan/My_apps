@@ -33,6 +33,7 @@ const UserWorkDetails = () => {
 
   return (
     <form className={formClassNames.form}>
+      <h2>Work Details</h2>
       <input
         type="text"
         name="companyname"
